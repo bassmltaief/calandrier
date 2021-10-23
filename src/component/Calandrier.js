@@ -10,35 +10,43 @@ import "react-datepicker/dist/react-datepicker.css";
 import {Modal, Button} from 'antd';
 import moment from 'moment';
 import TimePicker from 'react-time-picker';
+import Time from "./Time";
 
 const locales = {
     "ar-TN": require("date-fns/locale/ar-TN"),
 };
+const formats = {
+    eventTimeRangeFormat: range =>
+      `${format(range.start, 'HH:mm')} – ${format(range.end, 'HH:mm')}`,
+  };
 const localizer = dateFnsLocalizer({
     format,
     parse,
     startOfWeek,
     getDay,
     locales,
+    
 });
 
 const events = [
     {
         title: "Big Meeting",
         allDay: true,
-        start: (2021, 9,22,17,30,0),
-        end: new Date(2021, 9, 22,"6:00 PM"),
-
+        start: (2021, 9,22),
+        end: new Date(2021, 9, 22),
+        Color: "#534e09"
     },
     {
         title: "Vacation",
-        start: new Date(2021, 9, 7),
-        end: new Date(2021, 9, 10),
+        start: new Date(2021, 9, 11),
+        end: new Date(2021, 9, 11),
+        Color:"#4b1111"
     },
     {
         title: "Conference",
         start: new Date(2021, 9, 20),
-        end: new Date(2021, 9, 23),
+        end: new Date(2021, 9, 20),
+        color:"#e70808"
     },
 ];
 
@@ -62,9 +70,10 @@ const Calender = () => {
 
 
     return (
-        <div className="App">
+        <div >
             <h1>Calendar</h1>
             <Button onClick={showModal}>Add New Event</Button>
+           
             <Modal title="Add New Event" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
                 <div>
                     <div style={{display: 'flex', alignItems: 'center'}}>
@@ -95,13 +104,23 @@ const Calender = () => {
                             <h5>Time End</h5>
                             <TimePicker onChange={(timeEnd) => setNewEvent({...newEvent, timeEnd})}
                                         value="01:00:00"/>
+                                
                         </div>
+                    </div>
+                    <div style={{display: 'flex', alignItems: 'center'}}>
+                        <h5 style={{flex: 1}}>Color</h5>
+                        <input className="input" style={{flex: 3}} type="color" value={newEvent.Color}
+                                     onChange={(e) => setNewEvent({...newEvent, Color: e.target.value})} />
+                                
                     </div>
                 </div>
             </Modal>
-
-            <Calendar localizer={localizer} events={allEvents} startAccessor="start" endAccessor="end"
-                      style={{height: 400, margin: "50px"}}/>
+            <div>
+        
+                <Calendar localizer={localizer} formats={formats} events={allEvents} startAccessor="start" endAccessor="end"
+                      style={{height: 400, margin: "50px"}}  defaultTimeStart={moment().add(-12, 'hour')}
+                      defaultTimeEnd={moment().add(12, 'hour')}/>
+             </div>
         </div>
     );
 }
