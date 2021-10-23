@@ -65,7 +65,40 @@ const Calender = () => {
         <div className="App">
             <h1>Calendar</h1>
             <Button onClick={showModal}>Add New Event</Button>
-          
+            <Modal title="Add New Event" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+                <div>
+                    <div style={{display: 'flex', alignItems: 'center'}}>
+                        <h5 style={{flex: 1}}>Event Titre</h5>
+                        <input type="text" placeholder="Add Title" style={{flex: 3}} value={newEvent.title}
+                               onChange={(e) => setNewEvent({...newEvent, title: e.target.value})}/>
+                    </div>
+                    <div style={{display: 'flex', alignItems: 'center',justifyContent: 'space-between'}}>
+                        <div style={{display: 'flex', alignItems: 'center',justifyContent: 'space-between'}}>
+                            <h5>Start Date</h5>
+                            <DatePicker placeholderText="Start Date" style={{marginRight: "10px"}}
+                                        selected={newEvent.start}
+                                        onChange={(start) => setNewEvent({...newEvent, start})}/>
+                        </div>
+                        <div style={{display: 'flex', alignItems: 'center',justifyContent: 'space-between'}}>
+                            <h5>End Date</h5>
+                            <DatePicker placeholderText="End Date" selected={newEvent.end}
+                                        onChange={(end) => setNewEvent({...newEvent, end})}/>
+                        </div>
+                    </div>
+                    <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                        <div style={{display: 'flex', alignItems: 'center',justifyContent: 'space-between'}}>
+                            <h5>Time Start</h5>
+                            <TimePicker onChange={(timeStart) => setNewEvent({...newEvent, timeStart})}
+                                        value="01:00:00"/>
+                        </div>
+                        <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                            <h5>Time End</h5>
+                            <TimePicker onChange={(timeEnd) => setNewEvent({...newEvent, timeEnd})}
+                                        value="01:00:00"/>
+                        </div>
+                    </div>
+                </div>
+            </Modal>
 
             <Calendar localizer={localizer} events={allEvents} startAccessor="start" endAccessor="end"
                       style={{height: 400, margin: "50px"}}/>
