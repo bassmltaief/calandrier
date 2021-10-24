@@ -10,7 +10,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import {Modal, Button} from 'antd';
 import moment from 'moment';
 import TimePicker from 'react-time-picker';
-import Time from "./Time";
+import Events from "../Utils/Events";
 
 const locales = {
     "ar-TN": require("date-fns/locale/ar-TN"),
@@ -28,28 +28,6 @@ const localizer = dateFnsLocalizer({
     
 });
 
-const events = [
-    {
-        title: "Big Meeting",
-        allDay: true,
-        start: (2021, 9,22),
-        end: new Date(2021, 9, 22),
-        Color: "#534e09"
-    },
-    {
-        title: "Vacation",
-        start: new Date(2021, 9, 11),
-        end: new Date(2021, 9, 11),
-        Color:"#4b1111"
-    },
-    {
-        title: "Conference",
-        start: new Date(2021, 9, 20),
-        end: new Date(2021, 9, 20),
-        color:"#e70808"
-    },
-];
-
 const Calender = () => {
     const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -65,8 +43,8 @@ const Calender = () => {
     const handleCancel = () => {
         setIsModalVisible(false);
     };
-    const [newEvent, setNewEvent] = useState({title: "", start: "", end: "", timeStart: "", timeEnd: ""});
-    const [allEvents, setAllEvents] = useState(events);
+    const [newEvent, setNewEvent] = useState({title: "", start: "", end: "", backColor:""});
+    const [allEvents, setAllEvents] = useState(Events);
 
 
     return (
@@ -117,7 +95,7 @@ const Calender = () => {
             </Modal>
             <div>
         
-                <Calendar localizer={localizer} formats={formats} events={allEvents} startAccessor="start" endAccessor="end"
+                <Calendar localizer={localizer} formats={formats} events={Events} startAccessor="start" endAccessor="end"
                       style={{height: 400, margin: "50px"}}  defaultTimeStart={moment().add(-12, 'hour')}
                       defaultTimeEnd={moment().add(12, 'hour')}/>
              </div>
