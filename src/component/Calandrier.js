@@ -15,10 +15,7 @@ import Events from "../Utils/Events";
 const locales = {
     "ar-TN": require("date-fns/locale/ar-TN"),
 };
-const formats = {
-    eventTimeRangeFormat: range =>
-      `${format(range.start, 'HH:mm')} – ${format(range.end, 'HH:mm')}`,
-  };
+
 const localizer = dateFnsLocalizer({
     format,
     parse,
@@ -48,7 +45,7 @@ const Calender = () => {
 
 
     return (
-        <div >
+        <div style={{width: '40%'}}>
             <h1>Calendar</h1>
             <Button onClick={showModal}>Add New Event</Button>
            
@@ -95,7 +92,7 @@ const Calender = () => {
             </Modal>
             <div>
         
-                <Calendar localizer={localizer} formats={formats} events={Events} startAccessor="start" endAccessor="end"
+                <Calendar localizer={localizer} events={Events} startAccessor="start" endAccessor="end"
                       style={{height: 400, margin: "50px"}}  defaultTimeStart={moment().add(-12, 'hour')}
                       defaultTimeEnd={moment().add(12, 'hour')}/>
              </div>

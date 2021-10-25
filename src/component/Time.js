@@ -4,9 +4,9 @@ import Events from '../Utils/Events'
 const Time = () => {
   
 return(
-<div >
+<div style={{width: '60%'}}>
             <h2> Time  </h2>
-            <DayPilotCalendar  events={Events} titre={Events.titre} />
+            <DayPilotCalendar  events={Events} />
 </div>
 
 );

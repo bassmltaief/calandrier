@@ -12,9 +12,9 @@ import Time from "./component/Time";
 function App() {
 
     return (
-        <div  style={{display: 'flex',flexDirection:'column',justifyContent:'space-between'}}>
-            <Time className="time"/>
-            <Calandrier className="calandrier"/>
+        <div  style={{display: 'flex'}}>
+                 <Time />
+                 <Calandrier />
         </div>
     );
 }
